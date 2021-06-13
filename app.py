@@ -10,14 +10,19 @@ from aws_cdk import core as cdk
 from aws_cdk import core
 
 from resource_stacks.custom_vpc import CustomVpcStack
+from resource_stacks.custom_ec2 import CustomEC2Stack
 
 # from first_project.first_project_stack import FirstProjectStack
 
 
 app = core.App()
 
+env_prod = core.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION'))
 
-customVpc = CustomVpcStack(app, "custom-vpc-stack")
+customVpc = CustomVpcStack(app, "custom-vpc-stack",
+                           env=env_prod)
+
+customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])

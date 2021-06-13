@@ -1,4 +1,5 @@
 from aws_cdk import aws_ec2 as _ec2
+from aws_cdk import aws_s3 as _s3
 from aws_cdk import core as cdk
 
 
@@ -32,9 +33,35 @@ class CustomVpcStack(cdk.Stack):
         )
 
         cdk.Tags.of(custom_vpc).add("Owner", "Marcel")
-        
 
         cdk.CfnOutput(self,
                       "customVpcOutput",
                       value=custom_vpc.vpc_id,
                       export_name="customVpcId")
+
+        externalBucket = _s3.Bucket.from_bucket_name(
+            self,
+            "ImportedBucket",
+            "external-bucket-541674726161"
+        )
+
+        cdk.CfnOutput(
+            self,
+            "importedBucketOutput",
+            value=externalBucket.bucket_name,
+            export_name="importBucketName"
+        )
+
+        importedVcp = _ec2.Vpc.from_lookup(
+            self,
+            "importedVpc",
+            # is_default=True,
+            vpc_id="vpc-f0805d8d"
+        )
+
+        cdk.CfnOutput(
+            self,
+            "importedVPC",
+            value=importedVcp.vpc_id,
+            export_name="importedVPC"
+        )
