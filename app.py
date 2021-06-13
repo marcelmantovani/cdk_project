@@ -11,9 +11,10 @@ from aws_cdk import core
 
 from first_project.first_project_stack import FirstProjectStack
 
-env_US = core.Environment(region="us-east-1")
 
 app = core.App()
+env_US = core.Environment(region=app.node.try_get_context('prod')['region'])
+print(app.node.try_get_context('prod')['region'])
 FirstProjectStack(app, "DevProjectStack", env=env_US
                   # If you don't specify 'env', this stack will be environment-agnostic.
                   # Account/Region-dependent features and context lookups will not work,
