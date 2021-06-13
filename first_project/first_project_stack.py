@@ -12,22 +12,23 @@ from aws_cdk import core
 
 class FirstProjectStack(cdk.Stack):
 
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: cdk.Construct, construct_id: str, is_prod=False, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
-        _s3.Bucket(
-            self,
-            "firstBucketId",
-            versioned=False,
-            encryption=_s3.BucketEncryption.S3_MANAGED,
-            block_public_access=_s3.BlockPublicAccess.BLOCK_ALL
-        )
-
-        webbucket = _s3.Bucket(
-            self,
-            "WebContentBucket"
-        )
+        if is_prod:
+            webbucket = _s3.Bucket(
+                self,
+                "WebContentBucket",
+                versioned=False,
+                encryption=_s3.BucketEncryption.S3_MANAGED,
+                block_public_access=_s3.BlockPublicAccess.BLOCK_ALL
+            )
+        else:
+            webbucket = _s3.Bucket(
+                self,
+                "WebContentBucket"
+            )
 
         output = core.CfnOutput(
             self,
@@ -41,4 +42,3 @@ class FirstProjectStack(cdk.Stack):
             self,
             "IAMGroup"
         )
-
