@@ -31,6 +31,9 @@ class CustomVpcStack(cdk.Stack):
             ]
         )
 
+        cdk.Tags.of(custom_vpc).add("Owner", "Marcel")
+        
+
         cdk.CfnOutput(self,
                       "customVpcOutput",
                       value=custom_vpc.vpc_id,

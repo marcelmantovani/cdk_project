@@ -20,6 +20,7 @@
         "account": "541674726161"
       },
       "prod": {
+        "support-email-contact":"test@test.com",
         "region": "us-east-1",
         "account": "541674726161",
         "encryption": true,
