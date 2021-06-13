@@ -1,5 +1,6 @@
 from aws_cdk import (
     aws_s3 as _s3,
+    aws_iam as _iam,
     core as cdk)
 
 # For consistency with other languages, `cdk` is the preferred import name for
@@ -18,6 +19,26 @@ class FirstProjectStack(cdk.Stack):
         _s3.Bucket(
             self,
             "firstBucketId",
-            versioned=True,
-            encryption=_s3.BucketEncryption.KMS_MANAGED
+            versioned=False,
+            encryption=_s3.BucketEncryption.S3_MANAGED,
+            block_public_access=_s3.BlockPublicAccess.BLOCK_ALL
         )
+
+        webbucket = _s3.Bucket(
+            self,
+            "WebContentBucket"
+        )
+
+        output = core.CfnOutput(
+            self,
+            "ContentOutput",
+            value=webbucket.bucket_name,
+            description=f"Simulated static webcontent bucket",
+            export_name="ContentOutput"
+        )
+
+        _iam.Group(
+            self,
+            "IAMGroup"
+        )
+
