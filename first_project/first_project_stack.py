@@ -15,7 +15,7 @@ class FirstProjectStack(cdk.Stack):
     def __init__(self, scope: cdk.Construct, construct_id: str, is_prod=False, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         print("Is encryption enabled in prod: ",
-              self.node.try_get_context('prod')['encryption'])
+              self.node.try_get_context('envs')['prod']['encryption'])
         # The code that defines your stack goes here
         if is_prod:
             webbucket = _s3.Bucket(

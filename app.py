@@ -9,13 +9,20 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 
-from first_project.first_project_stack import FirstProjectStack
+from resource_stacks.custom_vpc import CustomVpcStack
+
+# from first_project.first_project_stack import FirstProjectStack
 
 
 app = core.App()
-env_US = core.Environment(region=app.node.try_get_context('prod')['region'])
-print(app.node.try_get_context('prod')['region'])
-FirstProjectStack(app, "DevProjectStack", env=env_US
+
+
+customVpc = CustomVpcStack(app, "custom-vpc-stack")
+
+
+# env_US = core.Environment(region=app.node.try_get_context('envs')['prod']['region'])
+# print(app.node.try_get_context('envs')['prod']['region'])
+# FirstProjectStack(app, "DevProjectStack", env=env_US
                   # If you don't specify 'env', this stack will be environment-agnostic.
                   # Account/Region-dependent features and context lookups will not work,
                   # but a single synthesized template can be deployed anywhere.
@@ -31,7 +38,7 @@ FirstProjectStack(app, "DevProjectStack", env=env_US
                   #env=core.Environment(account='123456789012', region='us-east-1'),
 
                   # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-                  )
-FirstProjectStack(app, "ProdProjectStack", env=env_US, is_prod=True)
+                #   )
+# FirstProjectStack(app, "ProdProjectStack", env=env_US, is_prod=True)
 
 app.synth()
