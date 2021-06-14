@@ -3,6 +3,23 @@
 
 This was a blank project for Python development with CDK.
 
+## Prerequisites
+
+I suggest you try WSL and get your flavor of Linux. Follow Matt Livesey's awesome guide: [Python development using WSL 2 and Visual Studio Code](https://www.mjlivesey.co.uk/2020/08/02/vs-code-wsl2-python.html). If you insist doing your way...
+
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+- [AWS Account and User with Admin rights](https://portal.aws.amazon.com/billing/signup)
+- [Node.js](https://nodejs.org/)
+- [IDE for your programming language](https://code.visualstudio.com/)
+- AWS CDK Toolkit
+    ```sh
+    npm install -g aws-cdk
+    cdk --version
+    ```
+- [Python](https://www.python.org/downloads/)
+- [pip](https://pypi.org/project/pip/)
+
+
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 This project is set up like a standard Python project.  The initialization
@@ -25,7 +42,7 @@ step to activate your virtualenv.
 $ source .venv/bin/activate
 ```
 
-If you are a Windows platform, I suggest you try WSL and get your flavor of Linux. Follow Matt Livesey's awesome guide: [Python development using WSL 2 and Visual Studio Code](https://www.mjlivesey.co.uk/2020/08/02/vs-code-wsl2-python.html). If you insist doing your way... you would activate the virtualenv like this:
+If you are a Windows platform, you would activate the virtualenv like this:
 
 ```
 % .venv\Scripts\activate.bat
