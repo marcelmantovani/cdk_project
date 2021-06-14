@@ -19,6 +19,7 @@ I suggest you try WSL and get your flavor of Linux. Follow Matt Livesey's awesom
 - [Python](https://www.python.org/downloads/)
 - [pip](https://pypi.org/project/pip/)
 
+## Instructions
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
