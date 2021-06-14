@@ -1,7 +1,7 @@
 
-# Welcome to your CDK Python project!
+# Welcome to my CDK Python project!
 
-This is a blank project for Python development with CDK.
+This was a blank project for Python development with CDK.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -25,7 +25,7 @@ step to activate your virtualenv.
 $ source .venv/bin/activate
 ```
 
-If you are a Windows platform, you would activate the virtualenv like this:
+If you are a Windows platform, I suggest you try WSL and get your flavor of Linux. Follow Matt Livesey's awesome guide: [Python development using WSL 2 and Visual Studio Code](https://www.mjlivesey.co.uk/2020/08/02/vs-code-wsl2-python.html). If you insist doing your way... you would activate the virtualenv like this:
 
 ```
 % .venv\Scripts\activate.bat

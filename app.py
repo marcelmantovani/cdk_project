@@ -9,18 +9,27 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 from aws_cdk import core
 
-from resource_stacks.custom_vpc import CustomVpcStack
+# from resource_stacks.custom_vpc import CustomVpcStack
 from resource_stacks.custom_ec2 import CustomEC2Stack
+from app_stacks.vpc_stack import VpcStack
+from app_stacks.webserver_stack import WebServerStack
 
 # from first_project.first_project_stack import FirstProjectStack
 
 
 app = core.App()
 
-env_prod = core.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION'))
+env_prod = core.Environment(account=os.getenv(
+    'CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION'))
 
-customVpc = CustomVpcStack(app, "custom-vpc-stack",
-                           env=env_prod)
+# customVpc = CustomVpcStack(app, "custom-vpc-stack",
+#                            env=env_prod)
+
+
+# Application Stack ASG and ALB
+vpc_stack = VpcStack(app, "multi-tier-app-vpc-stack")
+webServerTier = WebServerStack(
+    app, "multi-tier-webserver", vpc_stack.vpc)
 
 customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
 
