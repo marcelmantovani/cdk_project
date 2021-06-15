@@ -14,6 +14,7 @@ from aws_cdk import core
 # from app_stacks.vpc_stack import VpcStack
 # from app_stacks.webserver_stack import WebServerStack
 from resource_stacks.custom_parameters_secrets import CustomParameterSecretStack
+from resource_stacks.custom_iam_roles_policies import CustomIamRolesPoliciesStack
 # from first_project.first_project_stack import FirstProjectStack
 
 
@@ -33,7 +34,8 @@ env_prod = core.Environment(account=os.getenv(
 
 # customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
 
-customSecrets = CustomParameterSecretStack(app, "custom-secrets")
+# customSecrets = CustomParameterSecretStack(app, "custom-secrets")
+customRoles = CustomIamRolesPoliciesStack(app, "custom-roles-policies")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
