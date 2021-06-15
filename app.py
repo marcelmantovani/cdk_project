@@ -10,10 +10,10 @@ from aws_cdk import core as cdk
 from aws_cdk import core
 
 # from resource_stacks.custom_vpc import CustomVpcStack
-from resource_stacks.custom_ec2 import CustomEC2Stack
-from app_stacks.vpc_stack import VpcStack
-from app_stacks.webserver_stack import WebServerStack
-
+# from resource_stacks.custom_ec2 import CustomEC2Stack
+# from app_stacks.vpc_stack import VpcStack
+# from app_stacks.webserver_stack import WebServerStack
+from resource_stacks.custom_parameters_secrets import CustomParameterSecretStack
 # from first_project.first_project_stack import FirstProjectStack
 
 
@@ -27,11 +27,13 @@ env_prod = core.Environment(account=os.getenv(
 
 
 # Application Stack ASG and ALB
-vpc_stack = VpcStack(app, "multi-tier-app-vpc-stack")
-webServerTier = WebServerStack(
-    app, "multi-tier-webserver", vpc_stack.vpc)
+# vpc_stack = VpcStack(app, "multi-tier-app-vpc-stack")
+# webServerTier = WebServerStack(
+#     app, "multi-tier-webserver", vpc_stack.vpc)
 
-customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
+# customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
+
+customSecrets = CustomParameterSecretStack(app, "custom-secrets")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
