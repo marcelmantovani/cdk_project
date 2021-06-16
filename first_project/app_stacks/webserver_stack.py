@@ -59,7 +59,7 @@ class WebServerStack(cdk.Stack):
                                     )
 
         # Create AutoScaling Group with 2 EC2 instances
-        web_server_asg = _autoscaling.AutoScalingGroup(
+        self.web_server_asg = _autoscaling.AutoScalingGroup(
             self,
             "webServerAsgId",
             vpc=vpc,
@@ -76,14 +76,14 @@ class WebServerStack(cdk.Stack):
         )
 
         # Allow ASG Security group receive traffic from ALB
-        web_server_asg.connections.allow_from(
+        self.web_server_asg.connections.allow_from(
             alb,
             _ec2.Port.tcp(80),
             description="Allows ASG Security group receive traffic from ALB"
         )
 
         # Add AutoScaling Group instance to ALB Target group
-        listener.add_targets("listenerId", port=80, targets=[web_server_asg])
+        listener.add_targets("listenerId", port=80, targets=[self.web_server_asg])
 
         # Output of the ALB Domain url
         output_alb_1 = cdk.CfnOutput(self,

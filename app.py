@@ -13,10 +13,12 @@ from aws_cdk import core
 # from resource_stacks.custom_ec2 import CustomEC2Stack
 # from app_stacks.vpc_stack import VpcStack
 # from app_stacks.webserver_stack import WebServerStack
-from resource_stacks.custom_parameters_secrets import CustomParameterSecretStack
+# from app_stacks.rds_3tier_stack import RdsDatabase3TierStack
+# from resource_stacks.custom_parameters_secrets import CustomParameterSecretStack
 # from resource_stacks.custom_iam_roles_policies import CustomIamRolesPoliciesStack
-from resource_stacks.custom_s3_resource_policy import CustomS3ResourcePolicyStack
+# from resource_stacks.custom_s3_resource_policy import CustomS3ResourcePolicyStack
 # from first_project.first_project_stack import FirstProjectStack
+from stack_from_cfn.stack_from_existing_cfntemplate import StackFromCloudformationTemplate
 
 
 app = core.App()
@@ -30,15 +32,23 @@ env_prod = core.Environment(account=os.getenv(
 
 # Application Stack ASG and ALB
 # vpc_stack = VpcStack(app, "multi-tier-app-vpc-stack")
+
 # webServerTier = WebServerStack(
 #     app, "multi-tier-webserver", vpc_stack.vpc)
 
+# db_3tier_stack = RdsDatabase3TierStack(
+#     app,
+#     "rds-3tier-stack",
+#     vpc_stack.vpc,
+#     webServerTier.web_server_asg.connections.security_groups)
 # customEc2 = CustomEC2Stack(app, "custom-ec2-stack", env=env_prod)
 
 # customSecrets = CustomParameterSecretStack(app, "custom-secrets")
 # customRoles = CustomIamRolesPoliciesStack(app, "custom-roles-policies")
 
-resourcePolicy = CustomS3ResourcePolicyStack(app, "custom-s3-resource-policy")
+# resourcePolicy = CustomS3ResourcePolicyStack(app, "custom-s3-resource-policy")
+
+cfn_stack = StackFromCloudformationTemplate(app, construct_id="stack-from-cfn")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
