@@ -9,3 +9,8 @@ aws-cdk.aws_ssm
 aws-cdk.aws_secretsmanager
 aws-cdk.aws_rds
 aws_cdk.cloudformation_include
+aws_cdk.aws_sns
+aws_cdk.aws_sns_subscriptions
+aws_cdk.aws_sqs
+aws_cdk.aws_lambda
+aws_cdk.aws_logs

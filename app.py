@@ -18,7 +18,10 @@ from aws_cdk import core
 # from resource_stacks.custom_iam_roles_policies import CustomIamRolesPoliciesStack
 # from resource_stacks.custom_s3_resource_policy import CustomS3ResourcePolicyStack
 # from first_project.first_project_stack import FirstProjectStack
-from stack_from_cfn.stack_from_existing_cfntemplate import StackFromCloudformationTemplate
+# from stack_from_cfn.stack_from_existing_cfntemplate import StackFromCloudformationTemplate
+# from resource_stacks.custom_sns import CustomSnsStack
+# from resource_stacks.custom_sqs import CustomSqsStack
+from serverless_stacks.custom_lambda import CustomLambdatack
 
 
 app = core.App()
@@ -48,7 +51,13 @@ env_prod = core.Environment(account=os.getenv(
 
 # resourcePolicy = CustomS3ResourcePolicyStack(app, "custom-s3-resource-policy")
 
-cfn_stack = StackFromCloudformationTemplate(app, construct_id="stack-from-cfn")
+# cfn_stack = StackFromCloudformationTemplate(app, construct_id="stack-from-cfn")
+
+# sns_stack = CustomSnsStack(app, "custom-sns-stack")
+
+# sqs_stack = CustomSqsStack(app, "custom-sns-stack")
+
+lambda_stack = CustomLambdatack(app, "custom-lambda")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
