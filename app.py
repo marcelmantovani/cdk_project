@@ -21,8 +21,12 @@ from aws_cdk import core
 # from stack_from_cfn.stack_from_existing_cfntemplate import StackFromCloudformationTemplate
 # from resource_stacks.custom_sns import CustomSnsStack
 # from resource_stacks.custom_sqs import CustomSqsStack
-from serverless_stacks.custom_lambda import CustomLambdatack
-
+# from serverless_stacks.custom_lambda import CustomLambdatack
+# from serverless_stacks.custom_lambda_src_from_s3 import CustomLambdaFromS3Stack
+# from serverless_stacks.custom_lambda_as_cron import CustomLambdaCronStack
+# from advanced_use_cases.deploy_static_site import DeployStaticSiteStack
+# from advanced_use_cases.deploy_cloudfront_oai_static_site import DeployCloudfrontOaiStaticSiteStack
+from advanced_use_cases.serverless_event_process import ServerlessEventProcessorWithS3EventStack
 
 app = core.App()
 
@@ -57,7 +61,16 @@ env_prod = core.Environment(account=os.getenv(
 
 # sqs_stack = CustomSqsStack(app, "custom-sns-stack")
 
-lambda_stack = CustomLambdatack(app, "custom-lambda")
+# lambda_stack = CustomLambdatack(app, "custom-lambda")
+
+# lambda_stack = CustomLambdaFromS3Stack(app, "custom-lambda")
+
+# lambda_as_cron = CustomLambdaCronStack(app, "CronLambdaStack")
+
+# static_site_deployment = DeployStaticSiteStack(app, "StaticWebSite")
+# cloudfront_oai_site = DeployCloudfrontOaiStaticSiteStack(app, "CDN-with-OAI")
+
+serveles_event_proc = ServerlessEventProcessorWithS3EventStack(app, "S3EventProcessor")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
