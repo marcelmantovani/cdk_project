@@ -26,7 +26,11 @@ from aws_cdk import core
 # from serverless_stacks.custom_lambda_as_cron import CustomLambdaCronStack
 # from advanced_use_cases.deploy_static_site import DeployStaticSiteStack
 # from advanced_use_cases.deploy_cloudfront_oai_static_site import DeployCloudfrontOaiStaticSiteStack
-from advanced_use_cases.serverless_event_process import ServerlessEventProcessorWithS3EventStack
+# from advanced_use_cases.serverless_event_process import ServerlessEventProcessorWithS3EventStack
+# from advanced_use_cases.serverless_rest_api_architecture import ServerlessRestApiArchitectureStack
+# from advanced_use_cases.serverless_data_stream_process import ServerlessStreamProcessorArchitectureWithKinesisStack
+# from advanced_use_cases.serverless_dynamodb_event_processor import ServerlessDdbStreamProcessorStack
+from advanced_use_cases.containerized_microservices_architecture import ContainerizedMicroserviceArchitectureWithEcsStack
 
 app = core.App()
 
@@ -70,7 +74,15 @@ env_prod = core.Environment(account=os.getenv(
 # static_site_deployment = DeployStaticSiteStack(app, "StaticWebSite")
 # cloudfront_oai_site = DeployCloudfrontOaiStaticSiteStack(app, "CDN-with-OAI")
 
-serveles_event_proc = ServerlessEventProcessorWithS3EventStack(app, "S3EventProcessor")
+# serveles_event_proc = ServerlessEventProcessorWithS3EventStack(app, "S3EventProcessor")
+
+# serverless_api = ServerlessRestApiArchitectureStack(app, "ServerlessApi")
+
+# serverless_with_kinesis = ServerlessStreamProcessorArchitectureWithKinesisStack(app, "ServerlessWithKinesis")
+
+# serverless_ddb_event = ServerlessDdbStreamProcessorStack(app, "ServerlessDdbEvent")
+
+container_mS = ContainerizedMicroserviceArchitectureWithEcsStack(app, "MicroserviceOnEcs")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])
