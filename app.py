@@ -32,7 +32,8 @@ from aws_cdk import core
 # from advanced_use_cases.serverless_dynamodb_event_processor import ServerlessDdbStreamProcessorStack
 # from advanced_use_cases.containerized_microservices_architecture import ContainerizedMicroserviceArchitectureWithEcsStack
 # from advanced_use_cases.serverless_container_architecture import ServerlessContainersWithFargateStack
-from advanced_use_cases.serverless_batch_processor_architecture import ServerlessBatchProcessWithFargateStack
+# from advanced_use_cases.serverless_batch_processor_architecture import ServerlessBatchProcessWithFargateStack
+from serverless_chat_application.multi_person_chat_applicaiton import MultiPersonChatApplicationStack
 
 app = core.App()
 
@@ -88,7 +89,9 @@ env_prod = core.Environment(account=os.getenv(
 
 # serverless_container = ServerlessContainersWithFargateStack(app, "ServerlessContainer")
 
-serverless_batch = ServerlessBatchProcessWithFargateStack(app, "ServerlessBatch")
+# serverless_batch = ServerlessBatchProcessWithFargateStack(app, "ServerlessBatch")
+
+chat_application = MultiPersonChatApplicationStack(app, "ChatApplication")
 
 cdk.Tags.of(app).add("support-email-contact",
                      app.node.try_get_context('envs')['prod']['support-email-contact'])

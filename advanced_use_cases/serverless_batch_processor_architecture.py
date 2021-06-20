@@ -1,6 +1,7 @@
 from aws_cdk import aws_ec2 as _ec2
 from aws_cdk import aws_ecs as _ecs
 from aws_cdk import aws_ecs_patterns as _ecs_patterns
+from aws_cdk.aws_applicationautoscaling import Schedule
 from aws_cdk import core as cdk
 
 
@@ -19,29 +20,25 @@ class ServerlessBatchProcessWithFargateStack(cdk.Stack):
         )
 
         # Create Fargat Cluster inside the VPC
-        micro_service_cluster = _ecs.Cluster(
+        batch_process_cluster = _ecs.Cluster(
             self,
-            "microServiceCluster",
+            "batchProcessCluster",
             vpc=vpc
         )
 
-        # Deploy Container in the micro Service with an Application Load Balancer
-        serverless_web_service = _ecs_patterns.ApplicationLoadBalancedFargateService(
+        # Deploy Batch Processing container task in Fargate with Cloudwatch event schedule
+        batch_process_task = _ecs_patterns.ScheduledFargateTask(
             self,
-            "webService",
-            cluster=micro_service_cluster,
-            memory_limit_mib=1024,
-            cpu=512,
-            task_image_options={
-                "image": _ecs.ContainerImage.from_registry("mystique/web-server"),
+            "batchProcessor",
+            cluster=batch_process_cluster,
+            scheduled_fargate_task_image_options={
+                "image": _ecs.ContainerImage.from_registry("mystique/batch-job-runner"),
+                "memory_limit_mib": 512,
+                "cpu": 256,
                 "environment": {
-                    "ENVIRONMENT": "PROD"
+                    "name": "TRIGGER",
+                    "value": "Cloudwatch"
                 }
             },
-            desired_count=2
-        )
-
-        # Server Health Checks
-        serverless_web_service.target_group.configure_health_check(
-            path="/"
+            schedule=Schedule.expression("rate(2 minutes)")
         )
