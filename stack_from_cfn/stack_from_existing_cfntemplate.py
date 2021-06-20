@@ -11,7 +11,7 @@ class StackFromCloudformationTemplate(cdk.Stack):
 
     # Read bootstrap script
         try:
-            with open("./first_project/stack_from_cfn/sample_template/cf_template.json", mode="r") as file:
+            with open("./stack_from_cfn/sample_template/cf_template.json", mode="r") as file:
                 cfn_template = file.read()
         except OSError:
             print("Unable to read template script")
@@ -25,7 +25,7 @@ class StackFromCloudformationTemplate(cdk.Stack):
         resources_from_cfn_template = cfn_include.CfnInclude(
             self,
             "cfn-template",
-            template_file="./first_project/stack_from_cfn/sample_template/cf_template.json"
+            template_file="./stack_from_cfn/sample_template/cf_template.json"
         )
 
         # bucket_arn = cdk.Fn.get_att("EncryptedS3Bucket", "Arn")

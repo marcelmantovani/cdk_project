@@ -32,7 +32,7 @@ class ServerlessStreamProcessorArchitectureWithKinesisStack(cdk.Stack):
 
         # Read Lambda Code
         try:
-            with open("./first_project/advanced_use_cases/lambda_src/stream_record_consumer.py", mode="r") as file:
+            with open("./advanced_use_cases/lambda_src/stream_record_consumer.py", mode="r") as file:
                 fn_code = file.read()
         except OSError:
             print("Unable to read function code script")
@@ -97,7 +97,7 @@ class ServerlessStreamProcessorArchitectureWithKinesisStack(cdk.Stack):
 
         # Read Lambda Code
         try:
-            with open("./first_project/advanced_use_cases/lambda_src/stream_data_producer.py", mode="r") as file:
+            with open("./advanced_use_cases/lambda_src/stream_data_producer.py", mode="r") as file:
                 producer_fn_code = file.read()
         except OSError:
             print("Unable to read function code script")

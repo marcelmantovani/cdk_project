@@ -27,7 +27,7 @@ class DeployStaticSiteStack(cdk.Stack):
             destination_bucket=static_content_bucket,
             sources=[
                 _deployment.Source.asset(
-                    "./first_project/advanced_use_cases/static_assets"
+                    "./advanced_use_cases/static_assets"
                 )
             ]
         )

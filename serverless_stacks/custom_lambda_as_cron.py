@@ -12,7 +12,7 @@ class CustomLambdaCronStack(cdk.Stack):
 
         # Read file with lambda code
         try:
-            with open("./first_project/serverless_stacks/lambda_source/lambda_processor.py", mode="r") as file:
+            with open("./serverless_stacks/lambda_source/lambda_processor.py", mode="r") as file:
                 fn_code = file.read()
         except OSError:
             print("Unable to read function code script")
